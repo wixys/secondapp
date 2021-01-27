@@ -1,15 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <template v-if="user">
+    <Message :username="user"/>
+  </template>
+  <template v-else>
+    <h1>Type username</h1>
+  </template>
+
+  <p><input type="text" v-model="user"></p>
+  <button @click="increment(10)">Increment</button>
+  {{ count }}
+
+  <Task />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Message from './components/Message.vue'
+import Task from './components/Task.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      user: '',
+      count: 0
+    }
+  },
   components: {
-    HelloWorld
+    Message,
+    Task
+  },
+  methods: {
+    increment(num) {
+      this.count += num
+    }
   }
 }
 </script>
